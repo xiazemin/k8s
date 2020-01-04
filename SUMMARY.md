@@ -9,7 +9,7 @@
   * [kubeadm init](chapter1/section5.md)
   * [Kubernetes的架构图](chapter1/section6.md)
   * [Kubernetes性能测试](chapter1/section7.md)
-* [chapter2](chapter2.md)
+* [kubernetes 性能测试方法](chapter2.md)
   * [section1](chapter2/section1.md)
   * [section2](chapter2/section2.md)
   * [section3](chapter2/section3.md)
