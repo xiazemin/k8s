@@ -3,7 +3,7 @@
 * [Kubernetes的几个概念和部署](README.md)
 * [安装](chapter1.md)
   * [Kubernetes是什么](chapter1/section1.md)
-  * [section2](chapter1/section2.md)
+  * [使用Minikube](chapter1/section2.md)
   * [section3](chapter1/section3.md)
   * [section4](chapter1/section4.md)
   * [section5](chapter1/section5.md)
