@@ -1,8 +1,5 @@
 **Kubernetes的架构图**
 
-
-
-  
 ![](https://www.hi-linux.com/img/linux/k8s_0330_01.png)
 
 **核心组件**
@@ -19,7 +16,7 @@ Master节点运行着集群管理相关的一组进程：`etcd`、`kube-apiserve
 
 你可以通过下面的命令获取节点运行情况列表：
 
-| 1 2 3 4  | $ kubectl get nodes  NAME          LABELS                               STATUS 172.19.17.99  kubernetes.io/hostname=172.19.17.99  Ready  |
+| 1 2 3 4 | $ kubectl get nodes  NAME          LABELS                               STATUS 172.19.17.99  kubernetes.io/hostname=172.19.17.99  Ready |
 | :--- | :--- |
 
 
@@ -67,7 +64,117 @@ Deployment的使用场景
 4. 如果现有的Deployment不稳定，那么回滚到一个早期的稳定的Deployment版本
 5. 暂停或者恢复一个Deployment
 
-* Service\(服务\)
+6. Service\(服务\)
 
 服务为一组Pod提供单一稳定的名称和地址。他们作为基本负载均衡器而存在。是一系列Pod以及这些Pod的访问策略的抽象。
+
+![](/assets/import2.png)
+
+Service具有如下特征：
+
+
+
+拥有一个唯一指定的名字
+
+拥有一个虚拟IP和端口号
+
+能够提供某种远程服务能力
+
+被映射到提供这种服务能力的一组容器上
+
+Service的服务进程目前都基于socket通信方式对外提供服务
+
+Service的服务进程目前都基于socket通信方式对外提供服务，Kubernetes内置了透明的负载均衡以及故障恢复的机制。
+
+
+
+Label\(标签\)
+
+Label\(标签\)是一组附加在对象上的键值对，主要解决Service与Pod之间的关联问题。
+
+
+
+标签常用来从一组对象中选取符合条件的对象，这也是Kubernates中目前为止最重要的节点分组方法。标签的本质是附属在对象上的非系统属性类的元数据， 即它不是名字、Id以及对象的硬件属性，而是一些附加的键值对。
+
+
+
+Annotation\(注解\)
+
+Annotation与Label类似，也使用key/value键值对的形式进行定义。Label具有严格的命名规则，它定义的是Kubernetes对象的元数据（Metadata），并且用于Label Selector。Annotation则是用户任意定义的"附加"信息，以便于外部工具进行查找。
+
+
+
+用Annotation来记录的信息包括：
+
+
+
+build信息、release信息、Docker镜像信息等，例如时间戳、release id号、PR号、镜像hash值、docker registry地址等；
+
+日志库、监控库、分析库等资源库的地址信息；
+
+程序调试工具信息，例如工具名称、版本号等；
+
+团队的联系信息，例如电话号码、负责人名称、网址等。
+
+Namespace\(命名空间\)
+
+使用Namespace来组织kubernetes的各种对象，可以实现用户的分组\(多租户\)，对不同的租户还可以进行单独的资源设置和管理，是的整个集群的资源配置非常灵活。
+
+
+
+Scheduler
+
+将Pod调度到合适的Node上启动运行
+
+
+
+Volume\(容器共享存储卷\)
+
+Volume是Pod中能够被多个容器访问的共享目录。Kubernetes的Volume概念与Docker的Volume比较类似，但不完全相同。Kubernetes中的Volume与Pod生命周期相同，但与容器的生命周期不相关。当容器终止或者重启时，Volume中的数据也不会丢失。另外，Kubernetes支持多种类型的Volume，并且一个Pod可以同时使用任意多个Volume。
+
+
+
+Persistent Volume\(持久卷\)
+
+Persistent Volume\(PV\)是集群之中的一块网络存储。跟Node一样，也是集群的资源。PV跟Volume \(卷\)类似，不过会有独立于Pod的生命周期。这一API对象包含了存储的实现细节，例如NFS、iSCSI或者其他的云提供商的存储系统。
+
+
+
+Persistent Volume Claims\(持久卷申请\)
+
+用户通过持久卷请求\(PVC\)申请存储资源。它跟Pod类似，Pod消费Node的资源，PVC消费PV的资源。Pod能够申请特定的资源\(CPU和内存\)；PVC可以申请大小、访问方式（例如mount rw一次或mount ro多次等多种方式）。
+
+
+
+Horizontal Pod Autoscaling\(Pod自动扩容\)
+
+Horizontal Pod Autoscaler简称HPA，意思是Pod横向自动扩容。可以实现基于CPU使用率的Pod自动伸缩的功能。
+
+
+
+与之前的RC、Deployment一样，也属于一种Kubernetes资源对象。通过追踪分析RC控制的所有目标Pod的负载变化情况，来确定是否需要针对性的调整目标Pod数，这是HPA的实现原理。
+
+
+
+HPA有两种方式作为Pod负载的度量指标：CPUUtilizationPercentage和应用程序自定义度量指标。
+
+
+
+Proxy\(代理\)
+
+反向代理，Proxy会根据Load Balancer规则将外网请求分发到后端正确的容器处理。
+
+
+
+上述这些组件是Kubernetes系统的核心组件，它们共同构成了Kubernetes系统的框架和计算模型。通过对它们进行灵活组合，用户就可以快速、方便地对容器集群进行配置、创建和管理。
+
+
+
+参考文档
+
+http://lihaoquan.me/2016/7/9/learning-k8s-1.html
+
+http://www.jianshu.com/p/63ffc2214788
+
+https://segmentfault.com/a/1190000004858278
 
