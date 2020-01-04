@@ -14,7 +14,7 @@
   * [prometheus](chapter2/section2.md)
   * [Kubernetes 部署 Flink](chapter2/section3.md)
     * [部署 JobManager](chapter2/section3/bu-shu-jobmanager.md)
-  * [section4](chapter2/section4.md)
+  * [容器编排](chapter2/section4.md)
   * [section5](chapter2/section5.md)
   * [section6](chapter2/section6.md)
 * [chapter3](chapter3.md)
