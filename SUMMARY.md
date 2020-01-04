@@ -12,7 +12,7 @@
 * [kubernetes 性能测试方法](chapter2.md)
   * [在K8s中定义Pod中运行容器有两个维度的限制：](chapter2/section1.md)
   * [prometheus](chapter2/section2.md)
-  * [section3](chapter2/section3.md)
+  * [Kubernetes 部署 Flink](chapter2/section3.md)
   * [section4](chapter2/section4.md)
   * [section5](chapter2/section5.md)
   * [section6](chapter2/section6.md)
