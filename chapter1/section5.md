@@ -50,8 +50,6 @@ kubeadm config images list
 
 接下来我们可以从其他仓库批量下载镜像并且修改镜像标签：
 
-
-
 复制代码
 
 \#批量下载镜像
@@ -80,7 +78,7 @@ docker rmi coredns/coredns:1.3.1
 
 ### 3.使用“kubeadm init”启动k8s主节点
 
- 在前面，我们讲解过了“kubeadm init”命令可以用于启动一个Kubernetes主节点，语法如下所示：
+在前面，我们讲解过了“kubeadm init”命令可以用于启动一个Kubernetes主节点，语法如下所示：
 
 kubeadm init \[flags\]
 
@@ -113,4 +111,30 @@ kubeadm init --kubernetes-version=v1.15.0  --apiserver-advertise-address=172.16.
 ```
 
 “kubeadm init”命令会执行系列步骤来保障启动一个k8s主节点，我们可以通过命令“kubeadm init --dry-run”来查看其将进行的一些步骤，了解了其动作，我们才能保障在安装的过程中处理起来游刃有余
+
+其主体常规步骤（部分步骤根据参数会有变动）如下：
+
+
+
+确定Kubernetes版本。
+
+
+
+预检。出现错误则退出安装，比如虚拟内存（swap）没关闭，端口被占用。出现错误时，请用心按照按照提示进行处理，不推荐使用“--ignore-preflight-errors”来忽略。
+
+
+
+写入kubelet配置。
+
+
+
+生成自签名的CA证书（可指定已有证书）。
+
+
+
+将 kubeconfig 文件写入 /etc/kubernetes/ 目录以便 kubelet、controller-manager 和 scheduler 用来连接到 API server，它们每一个都有自己的身份标识，同时生成一个名为 admin.conf 的独立的kubeconfig文件，用于管理操作（我们下面会用到）。
+
+
+
+为 kube-apiserver、kube-controller-manager和kube-scheduler生成静态Pod的定义文件。如果没有提供外部的etcd服务的话，也会为etcd生成一份额外的静态Pod定义文件。这些静态Pod的定义文件会写入到“/etc/kubernetes/manifests”目录（如下图所示），kubelet会监视这个目录以便在系统启动的时候创建这些Pod。
 
