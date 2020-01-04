@@ -114,27 +114,53 @@ kubeadm init --kubernetes-version=v1.15.0  --apiserver-advertise-address=172.16.
 
 其主体常规步骤（部分步骤根据参数会有变动）如下：
 
-
-
 确定Kubernetes版本。
-
-
 
 预检。出现错误则退出安装，比如虚拟内存（swap）没关闭，端口被占用。出现错误时，请用心按照按照提示进行处理，不推荐使用“--ignore-preflight-errors”来忽略。
 
-
-
 写入kubelet配置。
-
-
 
 生成自签名的CA证书（可指定已有证书）。
 
-
-
 将 kubeconfig 文件写入 /etc/kubernetes/ 目录以便 kubelet、controller-manager 和 scheduler 用来连接到 API server，它们每一个都有自己的身份标识，同时生成一个名为 admin.conf 的独立的kubeconfig文件，用于管理操作（我们下面会用到）。
 
-
-
 为 kube-apiserver、kube-controller-manager和kube-scheduler生成静态Pod的定义文件。如果没有提供外部的etcd服务的话，也会为etcd生成一份额外的静态Pod定义文件。这些静态Pod的定义文件会写入到“/etc/kubernetes/manifests”目录（如下图所示），kubelet会监视这个目录以便在系统启动的时候创建这些Pod。
+
+注意：静态Pod是由kubelet进行管理，仅存在于特定节点上的Pod。它们不能通过API Server进行管理，无法与ReplicationController、Deployment或DaemonSet进行关联，并且kubelet也无法对其健康检查。静态 Pod 始终绑定在某一个kubelet，并且始终运行在同一个节点上。
+
+
+
+ 
+
+
+
+对master节点应用labels和taints以便不会在它上面运行其它的工作负载，也就是说master节点只做管理不干活。
+
+
+
+生成令牌以便其它节点注册。
+
+
+
+执行必要配置（比如集群ConfigMap，RBAC等）。
+
+
+
+安装“CoreDNS”组件（在 1.11 版本以及更新版本的Kubernetes中，CoreDNS是默认的DNS服务器）和“kube-proxy”组件。
+
+
+
+ 
+
+
+
+4.启动k8s主节点
+
+ 根据前面的规划，以及刚才讲述的“kubeadm init”命令语法和执行步骤，我们使用如下命令来启动k8s集群主节点：
+
+
+
+kubeadm init --kubernetes-version=v1.15.0  --apiserver-advertise-address=172.16.2.201  --pod-network-cidr=10.0.0.0/16 --service-cidr 11.0.0.0/16
+
+其中，kubernetes version为v1.15.0，apiserver地址为172.16.2.201，pod IP段为10.0.0.0/16。
 
