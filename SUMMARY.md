@@ -15,7 +15,7 @@
   * [Kubernetes 部署 Flink](chapter2/section3.md)
     * [部署 JobManager](chapter2/section3/bu-shu-jobmanager.md)
   * [容器编排](chapter2/section4.md)
-  * [section5](chapter2/section5.md)
+  * [Sandeep Dinesh\(谷歌\)的5大Kubernetes最佳实践](chapter2/section5.md)
   * [section6](chapter2/section6.md)
 * [chapter3](chapter3.md)
   * [section1](chapter3/section1.md)
