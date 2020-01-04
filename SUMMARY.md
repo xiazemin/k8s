@@ -5,7 +5,7 @@
   * [Kubernetes是什么](chapter1/section1.md)
   * [使用Minikube](chapter1/section2.md)
   * [Label控制Pod位置](chapter1/section3.md)
-  * [section4](chapter1/section4.md)
+  * [学习文档](chapter1/section4.md)
   * [section5](chapter1/section5.md)
   * [section6](chapter1/section6.md)
   * [section7](chapter1/section7.md)
