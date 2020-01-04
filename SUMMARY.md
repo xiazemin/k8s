@@ -10,7 +10,7 @@
   * [Kubernetes的架构图](chapter1/section6.md)
   * [Kubernetes性能测试](chapter1/section7.md)
 * [kubernetes 性能测试方法](chapter2.md)
-  * [section1](chapter2/section1.md)
+  * [在K8s中定义Pod中运行容器有两个维度的限制：](chapter2/section1.md)
   * [section2](chapter2/section2.md)
   * [section3](chapter2/section3.md)
   * [section4](chapter2/section4.md)
