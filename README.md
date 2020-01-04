@@ -24,3 +24,5 @@ Annotation\(注解\)：与Label类似，是用户为了方便管理，任意定�
 
 ![](/assets/import.png)
 
+于container本身相较于VM是一个轻量级的实现，尽管从逻辑上我们有namespace、label、pod、container几层的隔离，但事实上包括container本身都是一个基于逻辑意义上的隔离，并没有一个基于软件调用层面的stack划分。更薄的层级关系让性能损耗降到最低。当然，由于没有严格的stack划分，资源隔离直接受制于cgroup，用户态隔离则直接受制于kernel中的namespace，不具有严格意义上的逐级隔离。
+
