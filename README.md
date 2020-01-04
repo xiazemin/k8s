@@ -1,22 +1,10 @@
 # Kubernetes的几个概念和部署
 
-
-
 话说在数据中心虚拟化的大潮中，除了Google以外，每个大玩家都有一个自己的云，例如aws之于亚马逊，阿里云，百度云，腾讯云之流，而Google明显是点开了别的技能树，他的app engine以及后续的Cloud Platform则是基于container技术的实现。对于虚拟机的云，我们完全可以采用一个OpenStack来涵盖他们的功能，而对应Google的，Google则自己推出了他们云屏他的开源实现Kubernetes。
-
-
-
-
-
-
 
 Kubernetes\(以下将简称为K8S\)是一个基于docker container技术的资源管理调度系统。举个不太恰当例子的话，如果docker中位于底层的runc相当于libvirt；docker shell相当于qume的话，那K8S就相当于Openstack了。
 
-
-
 这里我们先讲讲几个概念：
-
-
 
 Node\(节点\)：在Kubernetes中，节点是实际工作的点，较早版本称为Minion。还是沿用上面不恰当的比喻，这个’node’相当于compute node和controller node。除了docker服务之外，每个节点上还会有Kubelet和 Kube-Proxy服务用语节点间的控制和通讯。
 
@@ -33,4 +21,6 @@ Proxy\(代理\)：反向代理，Proxy会根据Load Balancer规则将外网请�
 Namespace\(命名空间\)：通过将系统内部的对象划分到不同的Namespace中，形成逻辑上的不同分组，便于在共享使用整个集群的资源同时形成不同的权限规则。
 
 Annotation\(注解\)：与Label类似，是用户为了方便管理，任意定义的信息。
+
+![](/assets/import.png)
 
